@@ -1,0 +1,16 @@
+# Maven or Gradle build directories
+/target/
+/build/
+/.gradle/
+
+# IntelliJ IDEA files
+/.idea/
+/*.iml
+*.log
+*.DS_Store
+
+# ignore all files mentioned here Except these specific files and directories
+!.gitignore
+!gradlew
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
