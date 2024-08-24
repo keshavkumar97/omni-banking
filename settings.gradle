@@ -1,0 +1,12 @@
+include 'account-service'
+include 'customer-service'
+include 'transaction-service'
+include 'loan-service'
+include 'payment-gateway-service'
+include 'notification-service'
+include 'auth-service'
+include 'api-gateway'
+include 'discovery-service'
+include 'config-server'
+include 'monitoring-service'
+
