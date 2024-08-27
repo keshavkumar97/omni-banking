@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/omni-bank-dev
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+  flyway:
+    enabled: true
+    url: jdbc:postgresql://localhost:5432/omni-bank-dev
+#    user: migration_user
+#    password: migration_password
+    locations: classpath:db/migration
