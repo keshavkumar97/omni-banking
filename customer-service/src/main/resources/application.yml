@@ -1,6 +1,7 @@
 spring:
-  application:
-    name: account-service
+  banner:
+    location: banner.txt
+
   datasource:
     url: jdbc:postgresql://localhost:5432/omni-bank-dev
     username: postgres
@@ -16,6 +17,3 @@ spring:
     user: postgres
     password: postgres
     locations: classpath:db/migration
-
-  banner:
-    location: classpath:/banner.txt
