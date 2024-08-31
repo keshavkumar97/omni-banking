@@ -11,3 +11,11 @@ omni-banking is a banking application which follows microservice architecture an
 Sr.    service  
 1.     customer-service
 2.     account-service
+
+
+**Flyway-**  
+
+Flyway is used for sql script versioning. 
+
+Among multiple approach here we adopted centralized migration scripts.
+Here we create one separate module in which we keep all SQL scripts as versioned and flyway tool is used here to apply the script in the DB.

@@ -9,4 +9,5 @@ include 'api-gateway'
 include 'discovery-service'
 include 'config-server'
 include 'monitoring-service'
+include 'migration-script'
 

@@ -1,6 +1,12 @@
+server:
+  port: 8081
+
 spring:
+  banner:
+    location: classpath:/banner.txt
   application:
     name: account-service
+
   datasource:
     url: jdbc:postgresql://localhost:5432/omni-bank-dev
     username: postgres
@@ -10,12 +16,3 @@ spring:
     hibernate:
       ddl-auto: none
 
-  flyway:
-    enabled: true
-    url: jdbc:postgresql://localhost:5432/omni-bank-dev
-    user: postgres
-    password: postgres
-    locations: classpath:db/migration
-
-  banner:
-    location: classpath:/banner.txt

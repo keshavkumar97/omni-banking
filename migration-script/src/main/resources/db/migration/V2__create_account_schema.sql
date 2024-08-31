@@ -22,5 +22,5 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER update_account_updated_at
 BEFORE UPDATE ON "Account"
 FOR EACH ROW
-EXECUTE FUNCTION update_updated_at_column();
+EXECUTE FUNCTION update_account_updated_at_column();
 --=========================================================================

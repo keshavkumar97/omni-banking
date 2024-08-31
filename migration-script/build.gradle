@@ -1,0 +1,15 @@
+plugins {
+    id 'org.flywaydb.flyway' version '9.8.0'
+}
+
+flyway {
+    url = 'jdbc:postgresql://localhost:5432/omni-bank-dev'
+    user = 'postgres'
+    password = 'postgres'
+    locations = ['classpath:db/migration']  // Adjust the location as needed
+}
+
+dependencies {
+//    implementation 'org.flywaydb:flyway-core:9.16.3'
+    implementation 'org.postgresql:postgresql:42.7.2'
+}
