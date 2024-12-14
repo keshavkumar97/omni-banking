@@ -1,38 +1,48 @@
 package org.omni.customer.controller;
 
+import org.omni.customer.dto.CustomerDto;
+import org.omni.customer.service.CustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/customers")
 public class CustomerController {
 
+    @Autowired
+    CustomerService customerService;
+
     @PostMapping(value = "/")
-    public void createCustomer() {
-//        TO DO
+    public ResponseEntity<CustomerDto> createCustomer(@RequestBody CustomerDto customerDto) {
+        CustomerDto createdCustomer =
+                customerService.createCustomer(customerDto);
+        return new ResponseEntity<>(createdCustomer, HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/{id}")
     public void findCustomerById() {
-//        TO DO
+//        TODO
     }
 
     @PutMapping(value = "/{id}")
     public void updateCustomer() {
-//        TO DO
+//        TODO
     }
 
     @DeleteMapping(value = "delete")
     public void deleteCustomer() {
-//        TO DO
+//        TODO
     }
 
     @GetMapping(value = "/")
     public void findrAllCustomer() {
-//        TO DO
+//        TODO
     }
 
     @GetMapping(value = "/search")
-    public void searchCustomer(){
-//        TO DO
+    public void searchCustomer() {
+//        TODO
     }
 }
