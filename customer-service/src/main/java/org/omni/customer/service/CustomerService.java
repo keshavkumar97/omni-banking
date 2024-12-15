@@ -19,7 +19,7 @@ public class CustomerService {
     }
 
     public CustomerDto createCustomer(CustomerDto customerDto) {
-        if (repo.existsByEmail(customerDto.getEmail()))
+        if (repo.existsByEmail(customerDto.getEmail().toLowerCase()))
             throw new DuplicateEntryException("Email is already registered " +
                     "with a Customer");
         log.info("Onboard Customer. Saving Customer data");
