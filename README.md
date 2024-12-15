@@ -16,6 +16,8 @@ Sr.    service
 **Flyway-**  
 
 Flyway is used for sql script versioning. 
+(currently not in use as it was creating some problem while executing the script in db. 
+like when we run flywayMigrate task it runs the query in db and makes the table in camel case no matter what we provide)
 
 Among multiple approach here we adopted centralized migration scripts.
 Here we create one separate module in which we keep all SQL scripts as versioned and flyway tool is used here to apply the script in the DB.

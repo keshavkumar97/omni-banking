@@ -1,5 +1,5 @@
---Customer
-CREATE TABLE "Customer" (
+--customer
+CREATE TABLE 'customer' (
     customer_id BIGSERIAL PRIMARY KEY,
     first_name VARCHAR(50),
     last_name VARCHAR(50) NOT NULL,
@@ -21,7 +21,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER update_user_updated_at
-BEFORE UPDATE ON "Customer"
+BEFORE UPDATE ON "customer"
 FOR EACH ROW
 EXECUTE FUNCTION update_customer_updated_at_column();
 --==============================================================================
