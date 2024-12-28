@@ -21,6 +21,7 @@ public class CustomerMapperUtil {
 
     public static CustomerDto toDTO(Customer customer) {
         CustomerDto dto = new CustomerDto();
+        dto.setCustomerId(customer.getCustomerId());
         dto.setFirstName(customer.getFirstName());
         dto.setLastName(customer.getLastName());
         dto.setEmail(customer.getEmail().toLowerCase());
