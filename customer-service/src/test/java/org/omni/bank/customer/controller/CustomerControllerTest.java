@@ -47,7 +47,6 @@ class CustomerControllerTest {
                 "Abraham", "john@email.com",
                 "9876543210", "Steve Road, John Costal line, Arizona",
                 LocalDate.of(1997, 7, 12));
-        customerEntity = CustomerMapperUtil.toEntity(customerDto);
         objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
     }
 
