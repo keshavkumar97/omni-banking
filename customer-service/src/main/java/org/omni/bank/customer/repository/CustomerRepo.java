@@ -1,6 +1,6 @@
-package org.omni.customer.repository;
+package org.omni.bank.customer.repository;
 
-import org.omni.customer.model.Customer;
+import org.omni.bank.customer.model.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

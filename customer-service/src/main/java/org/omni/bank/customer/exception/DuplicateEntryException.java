@@ -1,4 +1,4 @@
-package org.omni.customer.exception;
+package org.omni.bank.customer.exception;
 
 public class DuplicateEntryException extends RuntimeException{
 

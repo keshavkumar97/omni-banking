@@ -1,4 +1,4 @@
-package org.omni.customer.model;
+package org.omni.bank.customer.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

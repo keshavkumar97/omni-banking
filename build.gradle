@@ -19,6 +19,7 @@ subprojects {
     apply plugin: 'io.spring.dependency-management'
 
     sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter'
@@ -28,6 +29,7 @@ subprojects {
         // Lombok annotation processor to generate code during compilation
         annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.30'
 
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
         //test dependencies
         testImplementation platform('org.junit:junit-bom:5.10.0')
         testImplementation 'org.junit.jupiter:junit-jupiter'

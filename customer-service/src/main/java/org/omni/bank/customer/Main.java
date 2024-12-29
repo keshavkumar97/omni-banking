@@ -1,4 +1,4 @@
-package org.omni.customer;
+package org.omni.bank.customer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
