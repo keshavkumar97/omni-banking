@@ -1,5 +1,6 @@
-package org.omni.customer.dto;
+package org.omni.bank.customer.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,5 +23,6 @@ public class CustomerDto {
 
     private String address;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dob;
 }

@@ -1,7 +1,7 @@
-package org.omni.customer.util;
+package org.omni.bank.customer.util;
 
-import org.omni.customer.dto.CustomerDto;
-import org.omni.customer.model.Customer;
+import org.omni.bank.customer.dto.CustomerDto;
+import org.omni.bank.customer.model.Customer;
 
 public class CustomerMapperUtil {
     private CustomerMapperUtil() {

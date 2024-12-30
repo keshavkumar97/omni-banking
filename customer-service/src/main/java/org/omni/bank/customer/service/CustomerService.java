@@ -1,6 +1,6 @@
-package org.omni.customer.service;
+package org.omni.bank.customer.service;
 
-import org.omni.customer.dto.CustomerDto;
+import org.omni.bank.customer.dto.CustomerDto;
 
 public interface CustomerService {
     CustomerDto createCustomer(CustomerDto customerDto);
