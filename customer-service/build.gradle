@@ -7,3 +7,7 @@ dependencies {
 
     testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '5.14.1'
 }
+
+bootJar{
+    mainClass = 'org.omni.bank.customer.Main'
+}
