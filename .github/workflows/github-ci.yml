@@ -43,6 +43,9 @@ jobs:
           distribution: temurin   # Specify the distribution (e.g., temurin, zulu, adopt)
           cache: gradle           # Optional: Cache dependencies for Gradle/Maven
 
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
       - name: Run tests
         run: ./gradlew test
 
