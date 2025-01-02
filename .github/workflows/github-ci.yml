@@ -90,7 +90,7 @@ jobs:
       # Step 3: build and push docker image
       - name: Build and Push Docker image
         run: |
-          docker build -t keshavkumar97/your-image-name:latest customer-service/Dockerfile
+          docker build -t keshavkumar97/your-image-name:latest ./customer-service/Dockerfile
           docker push keshavkumar97/your-image-name:latest
       # Step 3: Copy pre-built JAR file and Build Docker image for each service
 #      - name: Build and push Docker images
