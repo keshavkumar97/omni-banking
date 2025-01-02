@@ -92,7 +92,7 @@ jobs:
         run: |
           pwd
           echo .
-          docker build -t keshavkumar97/your-image-name:latest -f customer-service/Dockerfile
+          docker build -t keshavkumar97/your-image-name:latest -f customer-service/Dockerfile customer-service
           docker push keshavkumar97/your-image-name:latest
       # Step 3: Copy pre-built JAR file and Build Docker image for each service
 #      - name: Build and push Docker images
