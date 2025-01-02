@@ -99,8 +99,8 @@ jobs:
           pwd
           echo 'listing current directory file'
           ls -lrt
-          docker build -t keshavkumar97/your-image-name:latest -f customer-service/Dockerfile .
-          docker push keshavkumar97/your-image-name:latest
+          docker build -t keshavkumar97/omni-bank:latest -f customer-service/Dockerfile .
+          docker push keshavkumar97/omni-bank:latest
       # Step 3: Copy pre-built JAR file and Build Docker image for each service
 #      - name: Build and push Docker images
 #        run: |
