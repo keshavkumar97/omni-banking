@@ -11,4 +11,4 @@ COPY artifacts/customer-service-artifact.jar /app/customer-service-artifact.jar
 EXPOSE 8080
 
 # Run the application
-ENTRYPOINT ["java", "-jar", "/app/service-a.jar"]
+ENTRYPOINT ["java", "-jar", "/app/customer-service-artifact.jar"]
