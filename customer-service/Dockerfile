@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copy the pre-built JAR file from GitHub storage (use the path where you stored the JAR file)
-COPY artifacts/customer-service-1.0.0.jar /app/customer-service-1.0.0.jar
+COPY customer-service-1.0.0.jar /app/customer-service-1.0.0.jar
 
 # Expose the port your application will run on
 EXPOSE 8080
