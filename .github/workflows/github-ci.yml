@@ -10,7 +10,7 @@ on:
       - main
 
 env:
-  SERVICES: "account-service customer-service auth-service"
+  SERVICES: "customer-service auth-service"
 
 jobs:
   build:
