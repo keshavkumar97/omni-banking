@@ -37,7 +37,7 @@ jobs:
           for service in $SERVICES; do
           echo "Building $service"
           ./gradlew :$service:build
-          cp $service/build/libs/*.jar artifacts/$service.jar
+          cp $service/build/libs/*.jar artifacts/
           done
 
       # Step 5: Upload Artifact
