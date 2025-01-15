@@ -5,5 +5,5 @@ dependencies {
     implementation 'org.postgresql:postgresql:42.7.2'
 }
 bootJar{
-    mainClass = 'org/omni/bank/Main'
+    mainClass = 'org/omni/bank/auth/Main'
 }

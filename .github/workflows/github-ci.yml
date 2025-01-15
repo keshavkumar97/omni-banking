@@ -29,9 +29,9 @@ jobs:
       # Step 3: Provide gradle permission to run
       - name: Make gradlew executable
         run: chmod +x ./gradlew
-      # Step 4: Create & upload artifact
-      - name: Build and Upload Artifact with Gradle
-#        run: ./gradlew build
+      # Step 4: Create artifact
+      - name: Build with Gradle
+        #        run: ./gradlew build
         run: |
           mkdir -p artifacts
           for service in $SERVICES; do
@@ -41,12 +41,17 @@ jobs:
           done
 
       # Step 5: Upload Artifact
-#      - name: Upload Build Artifact
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: customer-service-artifact
-#          path: customer-service/build/libs/customer-service-*.jar
-##          path: artifact/
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifacts
+          path: artifacts/
+  #      - name: Upload Build Artifact
+  #        uses: actions/upload-artifact@v3
+  #        with:
+  #          name: customer-service-artifact
+  #          path: customer-service/build/libs/customer-service-*.jar
+  ##          path: artifact/
 
   test:
     runs-on: ubuntu-latest

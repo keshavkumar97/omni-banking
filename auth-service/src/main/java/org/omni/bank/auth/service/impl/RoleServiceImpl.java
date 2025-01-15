@@ -1,9 +1,9 @@
-package org.omni.bank.account.service.impl;
+package org.omni.bank.auth.service.impl;
 
 import io.micrometer.common.util.StringUtils;
-import org.omni.bank.account.model.Role;
-import org.omni.bank.account.repositories.RoleRepo;
-import org.omni.bank.account.service.RoleService;
+import org.omni.bank.auth.model.Role;
+import org.omni.bank.auth.repositories.RoleRepo;
+import org.omni.bank.auth.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
-package org.omni.bank.account.repositories;
+package org.omni.bank.auth.repositories;
 
-import org.omni.bank.account.model.Role;
+import org.omni.bank.auth.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

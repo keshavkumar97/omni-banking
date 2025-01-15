@@ -1,6 +1,6 @@
-package org.omni.bank.account.controller;
+package org.omni.bank.auth.controller;
 
-import org.omni.bank.account.service.RoleService;
+import org.omni.bank.auth.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package org.omni.bank.account.model;
+package org.omni.bank.auth.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;

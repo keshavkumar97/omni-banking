@@ -1,4 +1,4 @@
-package org.omni.bank;
+package org.omni.bank.auth;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

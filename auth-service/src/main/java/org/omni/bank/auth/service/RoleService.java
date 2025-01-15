@@ -1,6 +1,6 @@
-package org.omni.bank.account.service;
+package org.omni.bank.auth.service;
 
-import org.omni.bank.account.model.Role;
+import org.omni.bank.auth.model.Role;
 
 public interface RoleService {
     Role createRole(String roleName, String description);
