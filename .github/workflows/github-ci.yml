@@ -102,11 +102,19 @@ jobs:
         with:
           name: build-artifacts
           path: artifacts/
+      # Step 3: build and push docker image
+#      - name: Build and Push Docker image
+#        run: |
+#          pwd
+#          echo 'listing current directory file'
+#          ls -lrt
+#          docker build -t keshavkumar97/omni-bank:latest -f customer-service/Dockerfile .
+#          docker push keshavkumar97/omni-bank:latest
+      # Step 3: Build and push Docker image for each service
       - name: Build and push Docker images for each service
         run: |
-       # Assuming the JARs are stored in the 'artifacts' folder
-         for service in $SERVICES; do
-           echo "Building Docker image for $service"
-           docker build -t ${{ secrets.DOCKER_USERNAME }}/omni-bank-$service:latest -f $service/Dockerfile .
-           docker push ${{ secrets.DOCKER_USERNAME }}/omni-bank-$service:latest
-         done
+          for service in $SERVICES; do
+            echo "Building Docker image for $service"
+            docker build -t ${{ secrets.DOCKER_USERNAME }}/omni-bank-$service:latest -f $service/Dockerfile .
+            docker push ${{ secrets.DOCKER_USERNAME }}/omni-bank-$service:latest
+          done
