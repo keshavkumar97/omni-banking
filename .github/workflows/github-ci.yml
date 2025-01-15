@@ -113,7 +113,7 @@ jobs:
       # Step 3: Build and push Docker image for each service
       - name: Build and push Docker images for each service
         run: |
-          ls -lrt
+          ls -lrt artifacts
           for service in $SERVICES; do
             echo "Building Docker image for $service"
             docker build -t ${{ secrets.DOCKER_USERNAME }}/omni-bank-$service:latest -f $service/Dockerfile .
