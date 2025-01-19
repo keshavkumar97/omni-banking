@@ -21,6 +21,11 @@ public class Role {
     @Setter
     private String roleName;
 
+    @Column(name = "role_code", nullable = false, length = 3, unique = true)
+    @Getter
+    @Setter
+    private String roleCode;
+
     @Column(name = "description", nullable = false, length = 256)
     @Getter
     @Setter
@@ -41,8 +46,10 @@ public class Role {
     public Role() {    //NoArgsConstructor
     }
 
-    public Role(String roleName, String description) {  //AllArgsConstructor
+    public Role(String roleName, String description,String roleCode) {
+        //AllArgsConstructor
         this.roleName = roleName;
         this.description = description;
+        this.roleCode = roleCode;
     }
 }

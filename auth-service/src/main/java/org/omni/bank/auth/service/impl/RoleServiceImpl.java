@@ -16,10 +16,11 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Role createRole(String roleName, String description) {
+    public Role createRole(String roleName, String description,
+                           String roleCode) {
         if (StringUtils.isBlank(roleName))
             throw new IllegalArgumentException("Role name cannot be null");
 
-        return repo.save(new Role(roleName, description));
+        return repo.save(new Role(roleName, description, roleCode));
     }
 }
