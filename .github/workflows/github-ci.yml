@@ -42,7 +42,8 @@ jobs:
 
       # Step 5: Upload Artifact
       - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v3
+#        uses: actions/upload-artifact@v3  #v3 is deprecated and most probably not available becasue of which we were getting - Error: Missing download info for actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: build-artifacts
           path: artifacts/
