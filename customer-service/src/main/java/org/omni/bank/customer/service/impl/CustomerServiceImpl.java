@@ -10,6 +10,7 @@ import org.omni.bank.customer.service.CustomerService;
 import org.omni.bank.customer.util.CustomerMapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Slf4j
@@ -20,6 +21,7 @@ public class CustomerServiceImpl implements CustomerService {
         this.repo = repo;
     }
 
+    @Transactional
     @Override
     public CustomerDto createCustomer(CustomerDto customerDto) {
         if (repo.existsByEmail(customerDto.getEmail().toLowerCase()))
