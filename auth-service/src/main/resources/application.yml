@@ -16,3 +16,33 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
+    show-sql: false  # Better to use logging instead
+    properties:
+      hibernate:
+        format_sql: true
+        generate_statistics: true
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.stat: DEBUG
+#✅ ddl-auto: create
+#  Recreates the schema each time. For dev/testing only.
+#
+#✅ show-sql: true
+#  Logs raw SQL queries to console (without values).
+#
+#✅ hibernate.format_sql: true
+#  Formats SQL nicely in logs.
+#
+#✅ hibernate.generate_statistics: true
+#  Enables Hibernate to collect performance statistics (used with metrics/logging).
+#
+#✅ logging.level.org.hibernate.SQL: DEBUG
+#  Logs SQL statements (same as show-sql, but more consistent with SLF4J).
+#
+#✅ logging.level.org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+#  Logs actual bind parameter values for prepared statements.
+#
+#✅ logging.level.org.hibernate.stat: DEBUG
+#  Logs Hibernate stats, such as entity load counts, cache hits, etc.
