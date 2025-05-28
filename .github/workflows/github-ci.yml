@@ -18,10 +18,10 @@ jobs:
     steps:
       # Step 1: Check out code
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       # Step 2: Setup JDK 17 for building the java code
       - name: Set up JDK 17
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v4
         with:
           java-version: 17        # Specify the version of Java
           distribution: temurin   # Specify the distribution (e.g., temurin, zulu, adopt)
@@ -60,10 +60,10 @@ jobs:
     steps:
       # Step 1: Check out code
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       # Step 2: Setup JDK 17 for java code
       - name: Set up JDK 17
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v4
         with:
           java-version: 17        # Specify the version of Java
           distribution: temurin   # Specify the distribution (e.g., temurin, zulu, adopt)
@@ -82,7 +82,7 @@ jobs:
     steps:
       # Step 1: Check out code
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       # Step 2: Set up Docker CLI (when using custom runner. not needed with gitlab default runners and here we are using default runner)
 #      - name: Set up Docker
 #        uses: docker/setup-buildx-action@v2
@@ -99,7 +99,7 @@ jobs:
 #          password: ${{ secrets.DOCKER_PASSWORD }}
 #      Step : download artifact
       - name: Download Build Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: build-artifacts
           path: artifacts/
