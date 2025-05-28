@@ -21,10 +21,11 @@ public class CustomerController {
         return new ResponseEntity<>(createdCustomer, HttpStatus.CREATED);
     }
 
-//    @GetMapping(value = "/{id}")
-//    public void findCustomerById() {
-////        TODO
-//    }
+    @GetMapping(value = "/")
+    public ResponseEntity<CustomerDto> findCustomerById(@RequestParam("email") String email) {
+        CustomerDto customer = customerService.fetchCustomer(email);
+        return ResponseEntity.ok(customer);
+    }
 //
 //    @PutMapping(value = "/{id}")
 //    public void updateCustomer() {
