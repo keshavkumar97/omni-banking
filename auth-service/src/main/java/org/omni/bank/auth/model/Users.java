@@ -36,7 +36,7 @@ public class Users implements UserDetails {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "role", nullable = true) // can be null when user is
+    @Column(name = "role", nullable = false) // can be null when user is
     // registering. and set in service layer by code
     @Enumerated(EnumType.STRING)
     private RoleEnum role;
