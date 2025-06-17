@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.omni.bank.auth.config.JwtTokenProvider;
 import org.omni.bank.auth.dto.LoginRequest;
 import org.omni.bank.auth.dto.LoginResponse;
-import org.omni.bank.auth.dto.UserRegDtl;
+import org.omni.bank.auth.dto.RegisterUserRequest;
 import org.omni.bank.auth.exception.DuplicateEntryException;
 import org.omni.bank.auth.model.Users;
 //import org.omni.bank.auth.repositories.RoleRepo;
@@ -33,21 +33,21 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public Optional<Users> registerUser(UserRegDtl userRegDtl) {
-        if (userRepo.existsByUserName(userRegDtl.getUserName())) {
+    public Optional<Users> registerUser(RegisterUserRequest registerUserRequest) {
+        if (userRepo.existsByUserName(registerUserRequest.getUserName())) {
             throw new DuplicateEntryException(HttpStatus.CONFLICT, "User " +
                     "already exits");
         }
-        if (userRegDtl == null || StringUtils.isBlank(userRegDtl.getUserName())
-                || StringUtils.isBlank(userRegDtl.getPassword())) {
+        if (registerUserRequest == null || StringUtils.isBlank(registerUserRequest.getUserName())
+                || StringUtils.isBlank(registerUserRequest.getPassword())) {
             throw new IllegalArgumentException("User Registration detail " +
                     "cannot be null or empty");
         }
         log.info("Assigning default User role: " + RoleEnum.USER);
 
         Users user = new Users();
-        user.setUserName(userRegDtl.getUserName());
-        user.setPassword(userRegDtl.getPassword());
+        user.setUserName(registerUserRequest.getUserName());
+        user.setPassword(registerUserRequest.getPassword());
         user.setRole(RoleEnum.USER);
         Users savedUser = new Users();
         try {

@@ -2,7 +2,7 @@ package org.omni.bank.auth.controller;
 
 import org.omni.bank.auth.dto.LoginRequest;
 import org.omni.bank.auth.dto.LoginResponse;
-import org.omni.bank.auth.dto.UserRegDtl;
+import org.omni.bank.auth.dto.RegisterUserRequest;
 import org.omni.bank.auth.model.Users;
 import org.omni.bank.auth.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +21,8 @@ public class AuthController {
     }
 
     @PostMapping(path = "/register")
-    public ResponseEntity<Users> registerUser(@RequestBody UserRegDtl userRegDtl) {
-        var addedUser = authService.registerUser(userRegDtl);
+    public ResponseEntity<Users> registerUser(@RequestBody RegisterUserRequest registerUserRequest) {
+        var addedUser = authService.registerUser(registerUserRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(addedUser.orElse(null));
     }
 
