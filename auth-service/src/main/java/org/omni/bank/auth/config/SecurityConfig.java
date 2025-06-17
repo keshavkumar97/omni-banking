@@ -1,7 +1,6 @@
 package org.omni.bank.auth.config;
 
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,8 +27,6 @@ public class SecurityConfig {
     private final CustomUserDetailService customUserDetailsService;
 
 
-
-
     public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter,
                           CustomUserDetailService customUserDetailsService) {
         this.customUserDetailsService = customUserDetailsService;
@@ -41,6 +38,7 @@ public class SecurityConfig {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/usr/register").permitAll()
+                        .requestMatchers("/auth/usr/login").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess
