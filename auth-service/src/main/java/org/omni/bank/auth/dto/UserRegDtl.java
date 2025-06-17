@@ -10,5 +10,4 @@ import lombok.NoArgsConstructor;
 public class UserRegDtl {
     private String userName;
     private String password;
-    private String role;
 }
