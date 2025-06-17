@@ -1,5 +1,6 @@
 package org.omni.bank.auth.dto;
 
+import com.bank.common.RoleEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,7 +8,7 @@ import lombok.Setter;
 @Setter
 public class LoginResponse {
     private String jwtToken;
-    private String userId;
+    private long userId;
     private String userName;
-    private String role;
+    private RoleEnum role;
 }

@@ -9,7 +9,6 @@ import org.omni.bank.auth.dto.LoginResponse;
 import org.omni.bank.auth.dto.RegisterUserRequest;
 import org.omni.bank.auth.exception.DuplicateEntryException;
 import org.omni.bank.auth.model.Users;
-//import org.omni.bank.auth.repositories.RoleRepo;
 import org.omni.bank.auth.repositories.UserRepo;
 import org.omni.bank.auth.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,6 @@ import java.util.Optional;
 @Slf4j
 public class AuthenticationServiceImpl implements AuthenticationService {
     private final UserRepo userRepo;
-//    private final RoleRepo roleRepo;
     private final JwtTokenProvider tokenProvider;
 
 
@@ -67,9 +65,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         if (user.isPresent() && user.get().getPassword().equals(loginRequest.getPassword())) {
 
             loginResponse.setJwtToken(tokenProvider.generateToken(user.get()));
-//            loginResponse.getUserId();
-//            loginResponse.setRole();
-//            loginResponse.setUserName();
+            loginResponse.setUserId(user.get().getUserId());
+            loginResponse.setRole(user.get().getRole());
+            loginResponse.setUserName(user.get().getUsername());
             return loginResponse;
         }
 

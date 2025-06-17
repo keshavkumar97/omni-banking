@@ -9,5 +9,8 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
+dependencies {}
+
+tasks.named('bootJar') {
+    enabled = false
 }
