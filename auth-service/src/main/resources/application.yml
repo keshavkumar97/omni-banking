@@ -15,17 +15,23 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: false  # Better to use logging instead
-    properties:
-      hibernate:
-        format_sql: true
-        generate_statistics: true
+#    properties:
+#      hibernate:
+#        format_sql: true
+#        generate_statistics: true
 logging:
   level:
-    org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
-    org.hibernate.stat: DEBUG
+    sql: debug
+#    org.hibernate.SQL: DEBUG
+#    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+#    org.hibernate.stat: DEBUG
+
+auth:
+  jwt:
+    secret-key: "thisismyveryveryveryveryveryveryveryveryveryveryveryveryverylongsecretkeyforhs512!"
+
 #✅ ddl-auto: create
 #  Recreates the schema each time. For dev/testing only.
 #
