@@ -1,5 +1,8 @@
 server:
   port: 8082
+  error:
+    whitelabel:       #disabled spring's default whitelable page and configured
+      enabled: false  #/error endpoint as a fallback for any unexpected error
 
 spring:
   application:
