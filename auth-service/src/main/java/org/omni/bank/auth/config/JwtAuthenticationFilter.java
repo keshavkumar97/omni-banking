@@ -19,13 +19,16 @@ import java.io.IOException;
 @Slf4j
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private JwtTokenProvider tokenProvider;
-    private CustomUserDetailService userDetailService;
+    private final JwtTokenProvider tokenProvider;
+    private final CustomUserDetailService userDetailService;
+    private final SecurityProperties securityProperties;
 
     public JwtAuthenticationFilter(@Autowired JwtTokenProvider tokenProvider,
-                                   @Autowired CustomUserDetailService userDetailService) {
+                                   @Autowired CustomUserDetailService userDetailService,
+                                   @Autowired SecurityProperties securityProperties) {
         this.tokenProvider = tokenProvider;
         this.userDetailService = userDetailService;
+        this.securityProperties = securityProperties;
     }
 
     @Override
@@ -33,7 +36,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain)
             throws ServletException, IOException {
-//        System.out.println("reached filter");
+        String requestUrl = request.getServletPath();
         String token = getTokenFromRequest(request);
         if (token != null && tokenProvider.validateToken(token)) {
             String userName = tokenProvider.getUserNameFromToken(token);
@@ -45,15 +48,22 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             authenticationToken.setDetails(new WebAuthenticationDetailsSource().
                     buildDetails(request));
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-        }else{
-            log.error("No valid token found");
+        } else {
+            if (isUrlPublic(requestUrl))
+                log.info("No Valid token found: endpoint is public");
+            else
+                log.error("No valid token found");
         }
-        filterChain.doFilter(request,response);
+        filterChain.doFilter(request, response);
     }
 
     private String getTokenFromRequest(HttpServletRequest request) {
         String token = request.getHeader("Authorization");
         return (token != null && token.startsWith("Bearer")) ?
                 token.substring(7) : null;
+    }
+
+    private boolean isUrlPublic(String requestUrl) {
+        return securityProperties.getPublicUrl().stream().anyMatch((a) -> a.equals(requestUrl));
     }
 }
