@@ -21,12 +21,17 @@ spring:
 #      hibernate:
 #        format_sql: true
 #        generate_statistics: true
-logging:
-  level:
-    sql: debug
+#logging:
+#  level:
+#    sql: debug
 #    org.hibernate.SQL: DEBUG
 #    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 #    org.hibernate.stat: DEBUG
+
+app:
+  cors:
+    allow-origin:
+      app-url: "http://localhost:3000"
 
 auth:
   jwt:

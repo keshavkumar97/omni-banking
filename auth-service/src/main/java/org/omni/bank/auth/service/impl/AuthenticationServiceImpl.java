@@ -13,6 +13,7 @@ import org.omni.bank.auth.repositories.UserRepo;
 import org.omni.bank.auth.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -36,12 +37,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             throw new DuplicateEntryException(HttpStatus.CONFLICT, "User " +
                     "already exits");
         }
-        if (registerUserRequest == null || StringUtils.isBlank(registerUserRequest.getUserName())
+        if (StringUtils.isBlank(registerUserRequest.getUserName())
                 || StringUtils.isBlank(registerUserRequest.getPassword())) {
             throw new IllegalArgumentException("User Registration detail " +
                     "cannot be null or empty");
         }
-        log.info("Assigning default User role: " + RoleEnum.USER);
+        log.info("Assigning default role: " + RoleEnum.USER);
 
         Users user = new Users();
         user.setUserName(registerUserRequest.getUserName());
@@ -58,7 +59,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public LoginResponse login(LoginRequest loginRequest) {
-
+        if(loginRequest.getUserName().isBlank() || loginRequest.getPassword().isBlank())
+            throw  new IllegalArgumentException("Missing mandatory " +
+                    "field: username or password");
         Optional<Users> user =
                 userRepo.findByUserName(loginRequest.getUserName());
         LoginResponse loginResponse = new LoginResponse();
@@ -70,7 +73,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             loginResponse.setUserName(user.get().getUsername());
             return loginResponse;
         }
-
-        return loginResponse;
+        throw new BadCredentialsException("Credential mismatch");
     }
 }
