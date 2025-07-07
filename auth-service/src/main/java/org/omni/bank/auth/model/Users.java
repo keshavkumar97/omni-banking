@@ -36,6 +36,18 @@ public class Users implements UserDetails {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Column(name = "email", nullable = false)
+    private String email;
+
+    @Column(name = "phone", nullable = false)
+    private String phoneNumber;
+
+    @Column(name = "isPhoneVerified")
+    private boolean phoneVerified;
+
+    @Column(name = "isEmailVerified")
+    private boolean emailVerified;
+
     @Column(name = "role", nullable = false) // can be null when user is
     // registering. and set in service layer by code
     @Enumerated(EnumType.STRING)
@@ -45,9 +57,11 @@ public class Users implements UserDetails {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
+    private LocalDateTime updatedAt;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(()->"ROLE_"+this.role.name());
+        return List.of(() -> "ROLE_" + this.role.name());
     }
 
     @Override

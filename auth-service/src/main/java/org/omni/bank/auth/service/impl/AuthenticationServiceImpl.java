@@ -33,7 +33,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public Optional<Users> registerUser(RegisterUserRequest registerUserRequest) {
-        if (userRepo.existsByUserName(registerUserRequest.getUserName())) {
+        if (userRepo.existsByUserName(registerUserRequest.getUserName())
+                && userRepo.existsByEmail(registerUserRequest.getEmail())) {
             throw new DuplicateEntryException(HttpStatus.CONFLICT, "User " +
                     "already exits");
         }
@@ -46,6 +47,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         Users user = new Users();
         user.setUserName(registerUserRequest.getUserName());
+        user.setEmail(registerUserRequest.getEmail());
+        user.setPhoneNumber(registerUserRequest.getPhoneNumber());
         user.setPassword(registerUserRequest.getPassword());
         user.setRole(RoleEnum.USER);
         Users savedUser = new Users();
@@ -59,8 +62,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public LoginResponse login(LoginRequest loginRequest) {
-        if(loginRequest.getUserName().isBlank() || loginRequest.getPassword().isBlank())
-            throw  new IllegalArgumentException("Missing mandatory " +
+        if (loginRequest.getUserName().isBlank() || loginRequest.getPassword().isBlank())
+            throw new IllegalArgumentException("Missing mandatory " +
                     "field: username or password");
         Optional<Users> user =
                 userRepo.findByUserName(loginRequest.getUserName());
