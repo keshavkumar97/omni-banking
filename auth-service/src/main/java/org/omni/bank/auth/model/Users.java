@@ -57,6 +57,8 @@ public class Users implements UserDetails {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
+    @Column(name = "updated_at")
+    @CreationTimestamp
     private LocalDateTime updatedAt;
 
     @Override

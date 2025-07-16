@@ -55,7 +55,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         try {
             savedUser = userRepo.save(user);
         } catch (Exception ex) {
-            log.error("Error while registering user");
+            log.error("Error while registering user : {}",ex.getMessage());
         }
         return Optional.of(savedUser);
     }
