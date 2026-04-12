@@ -13,7 +13,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.omni.bank.customer.dto.CustomerDto;
 import org.omni.bank.customer.service.impl.CustomerServiceImpl;
-import org.omni.bank.customer.util.CustomerMapperUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -59,7 +58,7 @@ class CustomerControllerTest {
     void testCreateCustomer() { //testing core logic of controller
         Mockito.when(customerService.createCustomer(any(CustomerDto.class))).thenReturn(customerDto);
         ResponseEntity<CustomerDto> responseEntity =
-                customerController.createCustomer(customerDto);
+                customerController.createCustomer(customerDto, "test-user-id", "CUSTOMER");
 
         Assertions.assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
         Assertions.assertNotNull(responseEntity.getBody(), "Response body " +
@@ -82,19 +81,6 @@ class CustomerControllerTest {
                 .andExpect(jsonPath("$.firstName").value("John"));
     }
 
-//    @Test
-//    void testCreateCustomerUnSuccessfulWithException() {
-//        Mockito.when(customerService.createCustomer(any(CustomerDto.class))).thenThrow(DuplicateEntryException.class);
-//        ResponseEntity<CustomerDto> responseEntity =
-//                customerController.createCustomer(customerDto);
-//
-//        Assertions.assertEquals(HttpStatus.CONFLICT, responseEntity.getStatusCode());
-//        Assertions.assertNull(responseEntity.getBody(), "Response body " +
-//                "should be null as exception occured");
-//
-////  optional as service is being tested separately. so checking is correct interaction from controller is optional
-//        verify(customerService, Mockito.times(1)).createCustomer(any(CustomerDto.class));
-//    }
 
     @Test
     void findCustomerById() {
