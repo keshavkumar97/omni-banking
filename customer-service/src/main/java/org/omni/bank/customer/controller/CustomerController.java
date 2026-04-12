@@ -1,5 +1,6 @@
 package org.omni.bank.customer.controller;
 
+import jakarta.validation.Valid;
 import org.omni.bank.customer.dto.CustomerDto;
 import org.omni.bank.customer.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,16 @@ public class CustomerController {
     @Autowired
     CustomerService customerService;
 
+    /**
+     * X-User-Id and X-User-Role are forwarded by the API Gateway after JWT validation.
+     * No Spring Security filter needed here — the gateway is the enforcement point.
+     */
     @PostMapping(value = "/")
-    public ResponseEntity<CustomerDto> createCustomer(@RequestBody CustomerDto customerDto) {
-        CustomerDto createdCustomer =
-                customerService.createCustomer(customerDto);
+    public ResponseEntity<CustomerDto> createCustomer(
+            @Valid @RequestBody CustomerDto customerDto,
+            @RequestHeader(value = "X-User-Id", required = false) String userId,
+            @RequestHeader(value = "X-User-Role", required = false) String userRole) {
+        CustomerDto createdCustomer = customerService.createCustomer(customerDto);
         return new ResponseEntity<>(createdCustomer, HttpStatus.CREATED);
     }
 
@@ -26,24 +33,4 @@ public class CustomerController {
         CustomerDto customer = customerService.fetchCustomer(email);
         return ResponseEntity.ok(customer);
     }
-//
-//    @PutMapping(value = "/{id}")
-//    public void updateCustomer() {
-////        TODO
-//    }
-//
-//    @DeleteMapping(value = "delete")
-//    public void deleteCustomer() {
-////        TODO
-//    }
-//
-//    @GetMapping(value = "/")
-//    public void findrAllCustomer() {
-////        TODO
-//    }
-//
-//    @GetMapping(value = "/search")
-//    public void searchCustomer() {
-////        TODO
-//    }
 }

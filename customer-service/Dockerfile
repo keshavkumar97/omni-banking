@@ -1,14 +1,27 @@
-# Use a base image with JDK 17 (OpenJDK 17)
-FROM openjdk:17-jdk-slim
+# ── Stage 1: Build ────────────────────────────────────────────────────────────
+FROM gradle:8.5-jdk17 AS builder
+WORKDIR /workspace
 
-# Set the working directory in the container
+# Copy root Gradle files
+COPY build.gradle settings.gradle gradle.properties gradlew gradlew.bat ./
+COPY gradle ./gradle
+
+# Copy only the modules we need
+COPY common-lib ./common-lib
+COPY customer-service ./customer-service
+
+# Build customer-service fat JAR (skip tests for Docker build speed)
+RUN gradle :customer-service:bootJar -x test --no-daemon
+
+# ── Stage 2: Runtime ──────────────────────────────────────────────────────────
+FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 
-# Copy the pre-built JAR file from GitHub storage (use the path where you stored the JAR file)
-COPY artifacts/customer-service-1.0.0.jar /app/customer-service-1.0.0.jar
+# Non-root user for security
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+USER appuser
 
-# Expose the port your application will run on
-EXPOSE 8080
+COPY --from=builder /workspace/customer-service/build/libs/customer-service-1.0.0.jar app.jar
 
-# Run the application
-ENTRYPOINT ["java", "-jar", "/app/customer-service-1.0.0.jar"]
+EXPOSE 8081
+ENTRYPOINT ["java", "-jar", "app.jar"]
