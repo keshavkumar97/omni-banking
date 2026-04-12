@@ -1,0 +1,46 @@
+server:
+  server:
+  port: 8080
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      # Disable default filters that interfere with our custom JWT filter
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      routes:
+        # -- AUTH SERVICE (public - no JWT required) -----------------------------
+        - id: auth-service
+          uri: ${AUTH_SERVICE_URL:http://localhost:8082}
+          predicates:
+            - Path=/auth/**
+          filters:
+            - RewritePath=/auth/(?<segment>.*), /auth/${segment}
+        # -- CUSTOMER SERVICE (protected - JWT required) --------------------------
+        - id: customer-service
+          uri: ${CUSTOMER_SERVICE_URL:http://localhost:8081}
+          predicates:
+            - Path=/customers/**
+          filters:
+            - RewritePath=/customers/(?<segment>.*), /customers/${segment}
+      # Global CORS is handled by CorsConfig.java bean
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+# JWT secret - MUST match the secret used in auth-service
+gateway:
+  jwt:
+    secret-key: ${JWT_SECRET:omni-banking-super-secret-key-must-be-at-least-64-chars-long-for-hs512}
+# Actuator endpoints for health checks
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
+  endpoint:
+    health:
+      show-details: always
+logging:
+  level:
+    org.omni.bank.gateway: DEBUG
+    org.springframework.cloud.gateway: INFO

@@ -1,7 +1,17 @@
 package org.omni.bank;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+/**
+ * API Gateway entry point.
+ * Scans org.omni.bank and all sub-packages (including org.omni.bank.gateway.*).
+ */
+@SpringBootApplication
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        SpringApplication.run(Main.class, args);
     }
 }
+
+
