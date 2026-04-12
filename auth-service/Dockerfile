@@ -1,14 +1,27 @@
-# Use a base image with JDK 17 (OpenJDK 17)
-FROM openjdk:17-jdk-slim
+# ── Stage 1: Build ────────────────────────────────────────────────────────────
+FROM gradle:8.5-jdk17 AS builder
+WORKDIR /workspace
 
-# Set the working directory in the container
+# Copy root Gradle files
+COPY build.gradle settings.gradle gradle.properties gradlew gradlew.bat ./
+COPY gradle ./gradle
+
+# Copy only the modules we need (avoids re-building unrelated services)
+COPY common-lib ./common-lib
+COPY auth-service ./auth-service
+
+# Build auth-service fat JAR (skip tests for Docker build speed)
+RUN gradle :auth-service:bootJar -x test --no-daemon
+
+# ── Stage 2: Runtime ──────────────────────────────────────────────────────────
+FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 
-# Copy the pre-built JAR file from GitHub storage (use the path where you stored the JAR file)
-COPY artifacts/auth-service-1.0.0.jar /app/auth-service-1.0.0.jar
+# Non-root user for security
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+USER appuser
 
-# Expose the port your application will run on
-EXPOSE 8080
+COPY --from=builder /workspace/auth-service/build/libs/auth-service-1.0.0.jar app.jar
 
-# Run the application
-ENTRYPOINT ["java", "-jar", "/app/auth-service-1.0.0.jar"]
+EXPOSE 8082
+ENTRYPOINT ["java", "-jar", "app.jar"]
