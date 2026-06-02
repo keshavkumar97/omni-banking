@@ -2,12 +2,22 @@
 /target/
 /build/
 /.gradle/
+*/build/
+*/bin/
 
 # IntelliJ IDEA files
 /.idea/
 /*.iml
 *.log
 *.DS_Store
+
+# VS Code
+.vscode/
+
+# Compiled files
+*.class
+*.jar
+!gradle/wrapper/gradle-wrapper.jar
 
 # ignore all files mentioned here Except these specific files and directories
 !.gitignore
